@@ -1,0 +1,325 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Cookie",
+				"cookie-policy"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/ben.hassan/commsPortal2.0/scripts/import",
+		"/Users/ben.hassan/commsPortal2.0/app/models/stockcontrol/item.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/controllers/users_controller.rb",
+		"/Users/ben.hassan/commsPortal2.0/config/database.yml",
+		"/Users/ben.hassan/commsPortal2.0/app/controllers/home_controller.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/views/layouts/application.html.erb",
+		"/Users/ben.hassan/commsPortal2.0/app/assets/javascripts/cookie_policy.js",
+		"/Users/ben.hassan/commsPortal2.0/app/views/home/contact.html.erb",
+		"/Users/ben.hassan/commsPortal2.0/app/controllers/application_controller.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/views/users/me.html.erb",
+		"/Users/ben.hassan/commsPortal2.0/app/models/comms/connection.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/controllers/cloud_protect_quotes_controller.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/views/shared/whitelabel/_default/_contact.html.erb",
+		"/Users/ben.hassan/commsPortal2.0/app/models/user.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/models/customer.rb",
+		"/Users/ben.hassan/commsPortal2.0/config/routes.rb",
+		"/Users/ben.hassan/commsPortal2.0/config/initializers/devise.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/helpers/application_helper.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/models/comms.rb",
+		"/Users/ben.hassan/commsPortal2.0/app/views/shared/whitelabel/marstons/_contact.html.erb",
+		"/Users/ben.hassan/commsPortal2.0/app/views/alert_mailer/sensor_alert.text.erb"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 101.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "config.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"customer_con",
+				"app/controllers/customers_controller.rb"
+			],
+			[
+				"bulk_im",
+				"app/views/customers/bulk_import.html.erb"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"pg",
+				"scripts/import_pg"
+			],
+			[
+				"db.",
+				"lib/capistrano/tasks/db.rake"
+			],
+			[
+				"item",
+				"app/models/stockcontrol/item.rb"
+			],
+			[
+				"app/views/devise/edit",
+				"app/views/devise/passwords/edit.html.erb"
+			],
+			[
+				"login.",
+				"app/assets/stylesheets/login.scss"
+			],
+			[
+				"ApplciationHel",
+				"app/helpers/application_helper.rb"
+			],
+			[
+				"DeviseR",
+				"config/initializers/devise.rb"
+			],
+			[
+				"UserC",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"rotu",
+				"config/routes.rb"
+			],
+			[
+				"usersco",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"connection.rb",
+				"app/models/comms/connection.rb"
+			],
+			[
+				"devise",
+				"config/initializers/devise.rb"
+			],
+			[
+				"UsersCon",
+				"app/controllers/users_controller.rb"
+			],
+			[
+				"me.",
+				"app/views/users/me.html.erb"
+			],
+			[
+				"Appli",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"hom",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"cookiec",
+				"app/assets/javascripts/cookie_policy.js"
+			],
+			[
+				"application.htm",
+				"app/views/layouts/application.html.erb"
+			],
+			[
+				"Applica",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"HomeCo",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"Homecontrller",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"Customer",
+				"app/models/customer.rb"
+			],
+			[
+				"USer",
+				"app/models/user.rb"
+			],
+			[
+				"Contact",
+				"app/views/shared/whitelabel/_default/_contact.html.erb"
+			],
+			[
+				"contact",
+				"app/views/home/contact.html.erb"
+			],
+			[
+				"HomeControler",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"ApplicationController",
+				"app/controllers/application_controller.rb"
+			],
+			[
+				"homecon",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"sens",
+				"app/views/alert_mailer/sensor_alert.text.erb"
+			],
+			[
+				"database.",
+				"config/database.yml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 230.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

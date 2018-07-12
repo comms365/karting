@@ -1,0 +1,70 @@
+[2018-07-12 11:36:43 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rails g model Sites name:string
+[2018-07-12 11:36:54 +0100] - No Pry.
+[WARNING] The model name 'Sites' was recognized as a plural, using the singular 'Site' instead. Override with --force-plural or setup custom inflection rules for this noun before running the generator.
+      invoke  active_record
+      create    db/migrate/20180712103654_create_sites.rb
+      create    app/models/site.rb
+      invoke    test_unit
+      create      test/models/site_test.rb
+      create      test/fixtures/sites.yml
+
+[2018-07-12 11:36:54 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rails g model Sites name:string in 11.311371 sec
+[2018-07-12 11:36:54 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rake db:migrate
+[2018-07-12 11:37:03 +0100] - No Pry.
+== 20180712103654 CreateSites: migrating ======================================
+-- create_table(:sites)
+   -> 0.0981s
+== 20180712103654 CreateSites: migrated (0.0982s) =============================
+
+
+[2018-07-12 11:37:03 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rake db:migrate in 8.47121 sec
+[2018-07-12 11:38:48 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rails g migration ChangeTheModelAtTime1531391928
+[2018-07-12 11:38:51 +0100] -       invoke  active_record
+      create    db/migrate/20180712103851_change_the_model_at_time1531391928.rb
+
+[2018-07-12 11:38:51 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rails g migration ChangeTheModelAtTime1531391928 in 3.202096 sec
+[2018-07-12 11:38:51 +0100] - DOING...: bundle exec rake db:migrate
+[2018-07-12 11:38:59 +0100] - No Pry.
+== 20180712103851 ChangeTheModelAtTime1531391928: migrating ===================
+-- add_column(:sites, :deleted_at, :datetime)
+   -> 0.0018s
+== 20180712103851 ChangeTheModelAtTime1531391928: migrated (0.0019s) ==========
+
+
+[2018-07-12 11:38:59 +0100] - DONE: bundle exec rake db:migrate in 8.144179 sec
+[2018-07-12 11:41:11 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rails g model UserSiteSession user:references site:references
+[2018-07-12 11:41:15 +0100] -       invoke  active_record
+      create    db/migrate/20180712104114_create_user_site_sessions.rb
+      create    app/models/user_site_session.rb
+      invoke    test_unit
+      create      test/models/user_site_session_test.rb
+      create      test/fixtures/user_site_sessions.yml
+
+[2018-07-12 11:41:15 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rails g model UserSiteSession user:references site:references in 3.511408 sec
+[2018-07-12 11:41:15 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rake db:migrate
+[2018-07-12 11:41:23 +0100] - No Pry.
+== 20180712104114 CreateUserSiteSessions: migrating ===========================
+-- create_table(:user_site_sessions)
+   -> 0.0752s
+== 20180712104114 CreateUserSiteSessions: migrated (0.0753s) ==================
+
+
+[2018-07-12 11:41:23 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rake db:migrate in 8.021193 sec
+[2018-07-12 11:43:22 +0100] - DOING...: cd '/Users/ben.hassan/karting' && bundle exec rails g migration ChangeTheModelAtTime1531392202
+[2018-07-12 11:43:24 +0100] -       invoke  active_record
+      create    db/migrate/20180712104324_change_the_model_at_time1531392202.rb
+
+[2018-07-12 11:43:24 +0100] - DONE: cd '/Users/ben.hassan/karting' && bundle exec rails g migration ChangeTheModelAtTime1531392202 in 2.70081 sec
+[2018-07-12 11:43:24 +0100] - DOING...: bundle exec rake db:migrate
+[2018-07-12 11:43:32 +0100] - No Pry.
+== 20180712104324 ChangeTheModelAtTime1531392202: migrating ===================
+-- add_column(:user_site_sessions, :weather, :integer, {:null=>false})
+   -> 0.0026s
+-- add_column(:user_site_sessions, :lap_time, :string, {:null=>false})
+   -> 0.0130s
+-- add_column(:user_site_sessions, :session_date, :datetime, {:null=>false})
+   -> 0.0022s
+== 20180712104324 ChangeTheModelAtTime1531392202: migrated (0.0181s) ==========
+
+
+[2018-07-12 11:43:32 +0100] - DONE: bundle exec rake db:migrate in 7.978399 sec
