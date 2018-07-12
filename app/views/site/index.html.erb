@@ -1,2 +1,6 @@
 <h1>Welcome!</h1>
-<p>This is my page</p>
+<% if !current_user %> 
+<p>Please <a href="/users/sign_up">click here</a> to register to input your personal best lap time at a particular Go Karting venue.</p>
+<% else %>
+<p>You can now enter your personal best time on a particular venue.</p>
+<% end %>
