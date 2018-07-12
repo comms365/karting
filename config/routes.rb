@@ -2,12 +2,13 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+
+  # get 'users'
+
   mount Localtower::Engine, at: "localtower" if Rails.env.development?
 
 
   get 'site/index'
-
-  get 'site_controller/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
