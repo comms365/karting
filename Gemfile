@@ -27,7 +27,7 @@ gem 'pg'
 gem 'devise'
 gem 'cancancan'
 gem 'soft_deletion', '~> 1.3', '>= 1.3.1'
-gem "localtower"
+gem 'doorkeeper'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -39,6 +39,7 @@ gem "localtower"
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem "localtower"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 

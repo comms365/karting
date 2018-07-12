@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  
   mount Localtower::Engine, at: "localtower" if Rails.env.development?
+
 
   get 'site/index'
 
@@ -25,7 +28,7 @@ Rails.application.routes.draw do
   #   resources :products do
   #     member do
   #       get 'short'
-  #       post 'toggle'
+  #       post 'toggle'ß
   #     end
   #
   #     collection do
