@@ -28,7 +28,10 @@ gem 'devise'
 gem 'cancancan'
 gem 'soft_deletion', '~> 1.3', '>= 1.3.1'
 gem 'doorkeeper'
-
+gem 'bootstrap_form'
+gem 'enum_help'
+gem 'simple_form'
+gem 'formtastic'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
