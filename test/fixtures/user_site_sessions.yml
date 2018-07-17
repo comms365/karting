@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  user_id: 
-  site_id: 
+  lap_time: 9.99
+  weather: 1
+  session_date: 2018-07-16
 
 two:
-  user_id: 
-  site_id: 
+  lap_time: 9.99
+  weather: 1
+  session_date: 2018-07-16

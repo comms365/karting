@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @site.name %>
+  <br />
+  <strong>Location: </strong>
+  <%= @site.location %>
+</p>
+
+<hr />
+
+<p>
+	<table class="table table-striped table-bordered">
+		<tr class="warning">
+			<th>Position</th>
+			<th>Name</th>
+			<th>Time</th>
+		</tr>
+		<% i =0 %>
+		<% @leaderboard.each do |participant| %>
+		<tr>
+			<%i +=1 %>
+			<td><%=i%></td>
+			<td><%=participant.user_name%></td>
+			<td><%=participant.lap_time%> seconds</td>
+		</tr>
+		<% end %>
+
+	</table>
+</p>
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>
