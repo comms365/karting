@@ -1,6 +1,11 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
+
 <h1>Welcome!</h1>
 <% if !current_user %> 
 <p>Please <a href="/users/sign_up">click here</a> to register to input your personal best lap time at a particular Go Karting venue.</p>
 <% else %>
+<p>I am a <%=current_user.roles_mask %></p>
 <p>You can now enter your personal best time on a particular venue.</p>
 <% end %>

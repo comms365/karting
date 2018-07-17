@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lap time:</strong>
+  <%= @user_site_session.lap_time %>
+</p>
+
+<p>
+  <strong>Weather:</strong>
+  <%= @user_site_session.weather %>
+</p>
+
+<p>
+  <strong>Session date:</strong>
+  <%= @user_site_session.session_date %>
+</p>
+
+<%= link_to 'Edit', edit_user_site_session_path(@user_site_session) %> |
+<%= link_to 'Back', user_site_sessions_path %>
