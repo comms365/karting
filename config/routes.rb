@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-
+  
+  resources :user_site_sessions
   devise_for :users
   
   mount Localtower::Engine, at: "localtower" if Rails.env.development?
 
 
   get 'site/index'
-
-  get 'site_controller/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -63,4 +62,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :sites 
 end
