@@ -2,7 +2,7 @@
 
 <h1>All Go Karting Venues</h1>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered data-table">
   <thead>
     <tr class="warning">
       <th>Name</th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @sites.each do |site| %>
       <tr>
-        <td><%= site.name %></td>
+        <td><a href="/sites/<%=site.id%>"><%= site.name %></a></td>
         <% if can? :manage, 'Site' %>
         <td><%= link_to 'Show', site %></td>
         <td><%= link_to 'Edit', edit_site_path(site) %></td>

@@ -1,12 +1,13 @@
-
 <%= simple_form_for(@user_site_session) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
 
+  <% if current_user && current_user.admin? %>
   <div class="form-inputs">
     <%= f.input :user_id, collection: User.all, prompt: "Select User", selected: @user_site_session.user_id %>
   </div>
+  <% end %>
 
   <div class="form-inputs">
     <%= f.input :site_id, collection: Site.all, prompt: "Select Venue", label: 'Venue' %>

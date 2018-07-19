@@ -26,6 +26,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    # user is user role by defaultß
+    @user.roles_mask = 1
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -69,6 +71,10 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.fetch(:user, {})
+      if current_user.user?
+        params.require(:user).permit(:name, :email)
+      else
+        params.require(:user).permit(:name, :email, :roles_mask)
+      end    
     end
 end

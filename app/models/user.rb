@@ -4,9 +4,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_initialize :init
+
+    def init
+      self.roles_mask = 1;
+    end
+
+
   enum roles_mask: [:admin, :user]
 
   default_scope {order(id: :asc) }
+
 
   # ROLES = %i[admin user]
 
