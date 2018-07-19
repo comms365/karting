@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   resources :user_site_sessions
   devise_for :users
+  resources :users
   
   mount Localtower::Engine, at: "localtower" if Rails.env.development?
 

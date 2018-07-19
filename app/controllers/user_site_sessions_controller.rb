@@ -6,8 +6,10 @@ class UserSiteSessionsController < ApplicationController
   def index
     if params.key?('showAll') && current_user.admin?
       @user_site_sessions = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user,:site).find_by_all_quickest()
-    else 
+    elsif current_user
       @user_site_sessions = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find_by_user(current_user)
+      else
+        redirect_to "/"
     end
   end
 
@@ -34,6 +36,10 @@ class UserSiteSessionsController < ApplicationController
   # POST /user_site_sessions.json
   def create
     @user_site_session = UserSiteSession.new(user_site_session_params)
+
+    if(current_user && current_user.user?)
+        @user_site_session.user_id = current_user.id
+    end
 
     respond_to do |format|
       if @user_site_session.save
@@ -73,6 +79,12 @@ class UserSiteSessionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user_site_session
+      if(current_user.user?)
+      @user_site_session = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find(params[:id]);
+      if @user_site_session.user_id != current_user.id
+        redirect_to "/user_site_sessions"
+      end
+    end
       @user_site_session = UserSiteSession.find(params[:id])
     end
 

@@ -2,9 +2,9 @@ class UserSiteSession < ActiveRecord::Base
 	enum weather: [:sunny,:rainy,:overcast]
 	belongs_to :user
 	belongs_to :site
-	validate :expiration_date_cannot_be_in_the_future
+	validate :session_date_cannot_be_in_the_future
 
-	def expiration_date_cannot_be_in_the_future
+	def session_date_cannot_be_in_the_future
     if session_date? && session_date > Date.today
       errors.add(:session_date, "can't be in the future")
     end
