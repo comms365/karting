@@ -1,5 +1,6 @@
 class UserSiteSessionsController < ApplicationController
   before_action :set_user_site_session, only: [:show, :edit, :update, :destroy]
+  before_action :check_logged_in
 
   # GET /user_site_sessions
   # GET /user_site_sessions.json
@@ -91,5 +92,9 @@ class UserSiteSessionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_site_session_params
         params.require(:user_site_session).permit(:lap_time, :weather, :session_date,:site_id,:user_id)
+    end
+
+    def check_logged_in
+        redirect_to "/" if not current_user
     end
 end

@@ -33,3 +33,8 @@ body {
 .user_site_session_session_date select {
 	width:33%; min-width: auto; display:inline;
 }
+
+.required {
+	color: #FF0000;
+	font-weight: bold;
+}
