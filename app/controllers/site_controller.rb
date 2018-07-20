@@ -21,6 +21,9 @@ require "date"
   def generate
     @service =  UserSiteSessionReporterService.new;
   	regex = "^(?:199[0-9]|20[0-9][0-9])-(?:0[1-9]|1[0-2])-(?:[0-2][0-9]|3[0-1])$";
+    decimal = "/(^(\d+)(\.)?(\d+)?)|(^(\d+)?(\.)(\d+))/"
+
+
   	formVals = params[:user_site_session]
 
     if(formVals['site_id'].blank?) 
@@ -34,6 +37,20 @@ require "date"
           formVals['date_to'] = to
     elsif formVals['date_to'].match(regex) == nil
           msg = 'Date To is not valid. Please enter in YYYY-MM-DD format.'
+    end
+
+    if(not formVals['lap_time_from'].blank?)
+      if(!formVals['lap_time_from'] =~ decimal) 
+        formVals.delete("lap_time_from");
+        formVals.delete("lap_time_to");
+      end
+    end
+
+    if(not formVals['lap_time_to'].blank?)
+      if(!formVals['lap_time_to'] =~ decimal)
+        formVals.delete("lap_time_from"); 
+        formVals.delete("lap_time_to");
+      end
     end
 
   		@params = @service.construct(formVals)
