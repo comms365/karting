@@ -1,0 +1,55 @@
+<% if not local_assigns[:msg].nil? %>
+ <div class="error">
+ 	<h1>Error</h1>
+ 	<p><%=msg%></p>
+ </div>
+<% elsif @res.blank? %>
+ <div class="error">
+ 	<h1>Error</h1>
+ 	<p>No Results Found</p>
+ </div>
+<% else %>
+<p>
+	<table class="table table-striped table-bordered data-table">
+		<thead>
+			<tr class="warning text-center">
+				<th class="text-center">Position</th>
+				<th class="text-center">Name</th>
+				<th class="text-center">Date</th>
+				<% if params[:user_site_session][:weather].blank? %>
+				<th class="text-center">Weather</th>
+				<% end %>
+				<th class="text-center">Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% i =1 %>
+			<% lastScore = 0
+			   lastPos = 0 
+			%>
+			<% @res.each do |participant| %>
+			<tr>
+				<% myPosition = i %>
+				<% 
+				if(lastScore > 0 && participant.lap_time == lastScore)
+					myPosition = lastPos
+				end
+				lastScore = participant.lap_time
+				lastPos = myPosition
+				%>
+				<td><%=myPosition%></td>
+				<td><%=participant.user_name%></td>
+				<td><%=participant.session_date%></td>
+				<% if params[:user_site_session][:weather].blank? %>
+				<td><%=participant.weather.humanize%></td>
+				<% end %>
+				<td><%=participant.lap_time%> seconds</td>
+			</tr>
+			<%i +=1 %>
+			<% end %>
+		</tbody>
+
+	</table>
+</p>
+
+<% end %>

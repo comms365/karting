@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   after_initialize :init
 
     def init
-      self.roles_mask = 1;
+      self.roles_mask = 1 if self.new_record?
     end
 
 
