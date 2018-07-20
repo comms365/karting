@@ -10,8 +10,10 @@ class Ability
     elsif user.user?
       can :read, Site
       can :manage, UserSiteSession
-    else
+    elsif not user_signed_in
       can :read, Site
+      cannot :manage, User
+      cannot :manage, UserSiteSession
     end
 
   end
