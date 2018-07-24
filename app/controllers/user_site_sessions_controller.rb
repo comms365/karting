@@ -66,52 +66,35 @@ class UserSiteSessionsController < ApplicationController
     end
   end
 
-  private
-
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_site_session
-      if current_user.user?
-        @user_site_session = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find(params[:id])
-        redirect_to '/user_site_sessions' if @user_site_session.user_id != current_user.id
-      end
-      @user_site_session = UserSiteSession.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_site_session
+    if current_user.user?
+      @user_site_session = UserSiteSession.fetch_lap_times.find(params[:id])
+      redirect_to '/user_site_sessions' if @user_site_session.user_id != current_user.id
     end
+    @user_site_session = UserSiteSession.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_site_session_params
-      params.require(:user_site_session).permit(:lap_time, :weather, :session_date, :site_id, :user_id)
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_site_session_params
+    params.require(:user_site_session).permit(:lap_time, :weather, :session_date, :site_id, :user_id)
+  end
+
+  def check_logged_in
+    redirect_to '/' unless current_user
+  end
+
+  def before_create
+    @user_site_session = UserSiteSession.new(user_site_session_params)
+    @user_site_session.user_id = current_user.id if current_user && current_user.user?
+  end
+
+  def load_query
+    if current_user.admin?
+      @user_site_sessions = UserSiteSession.fetch_lap_times.all_quickest if params.key?('showAll')
+      @user_site_sessions = UserSiteSession.fetch_lap_times.me unless params.key?('showAll')
+    elsif current_user.user?
+      @user_site_sessions = UserSiteSession.fetch_lap_times.me
     end
-
-    def check_logged_in
-      redirect_to '/' unless current_user
-    end
-
-  private
-
-    def before_create
-      @user_site_session = UserSiteSession.new(user_site_session_params)
-      @user_site_session.user_id = current_user.id if current_user && current_user.user?
-    end
-
-  private
-
-    def load_query
-      if current_user.admin?
-        @user_site_sessions = if params.key?('showAll')
-                                UserSiteSession.select(
-                                  'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
-                                ).joins(:user, :site).all_quickest
-                              else
-                                UserSiteSession.select(
-                                  'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
-                                ).joins(:user, :site).find_by_me
-                              end
-      elsif current_user.user?
-        @user_site_sessions = UserSiteSession.select(
-          'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
-        ).joins(:user, :site).find_by_me
-      else
-        redirect_to '/'
-      end
-    end
+  end
 end

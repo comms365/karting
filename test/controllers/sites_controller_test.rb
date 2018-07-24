@@ -1,6 +1,5 @@
 require 'test_helper'
-# :nodoc:
-
+# this is the sites controller test
 class SitesControllerTest < ActionController::TestCase
   # test case
   setup do

@@ -1,6 +1,5 @@
 require 'test_helper'
-# :nodoc:
-
+# this is the usersitesessions controller test
 class UserSiteSessionsControllerTest < ActionController::TestCase
   # test case
   setup do
