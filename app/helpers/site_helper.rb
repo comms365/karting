@@ -1,2 +1,3 @@
+# module
 module SiteHelper
 end

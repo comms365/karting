@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Lap time:</strong>
+  <strong>Lap Time:</strong>
   <%= @user_site_session.lap_time %>
 </p>
 
 <p>
   <strong>Weather:</strong>
-  <%= @user_site_session.weather %>
+  <%= @user_site_session.weather.humanize %>
 </p>
 
 <p>

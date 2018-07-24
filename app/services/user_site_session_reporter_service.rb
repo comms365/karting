@@ -1,42 +1,41 @@
+# handles report query generation
 class UserSiteSessionReporterService
+  def initialize(params)
+    @params = params.slice('date_from', 'date_to', 'site_id', 'lap_time_from', 'lap_time_to', 'weather')
+    sanitize_params
+  end
 
-	def construct (params)
-		return {
-			"weather" => UserSiteSession.weathers[params[:weather]],
-			"date_from" => params[:date_from],
-			"date_to" => params[:date_to],
-			"site_id" => params[:site_id],
-			"lap_time_from" => params[:lap_time_from],
-			"lap_time_to" => params[:lap_time_to]
-		}
-	end
+  def build_query
+    @query = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name')
+                            .joins(:user, :site)
+                            .where(session_date: @params['date_from']..@params['date_to'])
+                            .where(site: @params['site_id'])
+                            .all_quickest
 
+    # if we have the selected weather include that in our where statement
+    @query = @query.where(weather: @params['weather']) if @params['weather'].present?
+    lap_time_query
+    @query
+  end
 
-	def build_query (params)
-		# core set of where conditions to match on
-		where = {
-			session_date: params['date_from']..params['date_to'], 
-			site: params['site_id']
-		}
+  private
 
-		# if we have the selected weather include that in our where statement
-		if(!params['weather'].blank?) 
-			where = where.merge({
-				weather: params['weather']
-			})
-		end
+    def sanitize_params
+      @params['weather'] = UserSiteSession.weathers[@params['weather']]
+      check_lap_times
+    end
 
-		# if we have a lap time range including from and to , then we will include them both in our where statement
-		if (!params['lap_time_from'].blank? && !params['lap_time_to'].blank?)
-			if(params['lap_time_from'].to_f && ( params['lap_time_to'].to_f && params['lap_time_to'].to_f != 0.0 ) ) 
-				where = where.merge({
-					lap_time: params['lap_time_from']..params['lap_time_to']
-				})
-			end
-		end
+    def check_lap_times
+      @params['lap_time_from'] = @params['lap_time_from'].to_f if @params['lap_time_from']
+      @params['lap_time_to'] = @params['lap_time_to'].to_f if @params['lap_time_to']
+      return unless @params['lap_time_to'] && @params['lap_time_to'].zero?
+      @params.delete('lap_time_to')
+      @params.delete('lap_time_from') if @params['lap_time_from']
+    end
 
-		res = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(
-			:user, :site).where(where).find_by_all_quickest()
-	end
-
+    def lap_time_query
+      # if we have a lap time range including from and to , then we will include them both in our where statement
+      return unless @params['lap_time_from'].present? && @params['lap_time_to'].present?
+      @query = @query.where(lap_time: @params['lap_time_from']..@params['lap_time_to'])
+    end
 end

@@ -1,19 +1,15 @@
+# model
 class UserSiteSession < ActiveRecord::Base
-	enum weather: [:sunny,:rainy,:overcast]
-	belongs_to :user
-	belongs_to :site
-	validate :session_date_cannot_be_in_the_future
+  enum weather: %i(sunny rainy overcast)
+  belongs_to :user
+  belongs_to :site
+  validate :session_date_cannot_be_in_the_future
 
-	def session_date_cannot_be_in_the_future
-    if session_date? && session_date > Date.today
-      errors.add(:session_date, "can't be in the future")
-    end
+  def session_date_cannot_be_in_the_future
+    errors.add(:session_date, "can't be in the future") if session_date? && session_date > Time.Zone.today
   end
 
-  scope :find_by_user, lambda { |user|
-    where(:user_id => user.id).order(lap_time: :ASC)
-  }
+  scope :find_by_me, -> { where(user: User.current_user).order(lap_time: :ASC) }
 
-  scope :find_by_all_quickest, -> { order(lap_time: :ASC) }
-
+  scope :all_quickest, -> { order(lap_time: :ASC) }
 end

@@ -1,47 +1,36 @@
+# controller
 class UserSiteSessionsController < ApplicationController
-  before_action :set_user_site_session, only: [:show, :edit, :update, :destroy]
+  # handles actions for CRUD actions for Lap Time records.
+  before_action :set_user_site_session, only: %i(show edit update destroy)
   before_action :check_logged_in
 
   # GET /user_site_sessions
   # GET /user_site_sessions.json
   def index
-    if params.key?('showAll') && current_user.admin?
-      @user_site_sessions = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user,:site).find_by_all_quickest()
-    elsif current_user
-      @user_site_sessions = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find_by_user(current_user)
-      else
-        redirect_to "/"
-    end
+    load_query
   end
 
   # GET /user_site_sessions/1
   # GET /user_site_sessions/1.json
-  def show
-  end
+  def show; end
 
   # GET /user_site_sessions/new
   def new
     @user_site_session = UserSiteSession.new
-    if can? :manage, 'User'
-      @user = User.all
-    else
-      @user = current_user
-    end
+    @user = if can? :manage, 'User'
+              User.all
+            else
+              current_user
+            end
   end
 
   # GET /user_site_sessions/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /user_site_sessions
   # POST /user_site_sessions.json
   def create
-    @user_site_session = UserSiteSession.new(user_site_session_params)
-
-    if(current_user && current_user.user?)
-        @user_site_session.user_id = current_user.id
-    end
-
+    before_create
     respond_to do |format|
       if @user_site_session.save
         format.html { redirect_to @user_site_session, notice: 'User site session was successfully created.' }
@@ -78,23 +67,51 @@ class UserSiteSessionsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user_site_session
-      if(current_user.user?)
-      @user_site_session = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find(params[:id]);
-      if @user_site_session.user_id != current_user.id
-        redirect_to "/user_site_sessions"
+      if current_user.user?
+        @user_site_session = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name').joins(:user, :site).find(params[:id])
+        redirect_to '/user_site_sessions' if @user_site_session.user_id != current_user.id
       end
-    end
       @user_site_session = UserSiteSession.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_site_session_params
-        params.require(:user_site_session).permit(:lap_time, :weather, :session_date,:site_id,:user_id)
+      params.require(:user_site_session).permit(:lap_time, :weather, :session_date, :site_id, :user_id)
     end
 
     def check_logged_in
-        redirect_to "/" if not current_user
+      redirect_to '/' unless current_user
+    end
+
+  private
+
+    def before_create
+      @user_site_session = UserSiteSession.new(user_site_session_params)
+      @user_site_session.user_id = current_user.id if current_user && current_user.user?
+    end
+
+  private
+
+    def load_query
+      if current_user.admin?
+        @user_site_sessions = if params.key?('showAll')
+                                UserSiteSession.select(
+                                  'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
+                                ).joins(:user, :site).all_quickest
+                              else
+                                UserSiteSession.select(
+                                  'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
+                                ).joins(:user, :site).find_by_me
+                              end
+      elsif current_user.user?
+        @user_site_sessions = UserSiteSession.select(
+          'user_site_sessions.*, users.name as user_name, sites.name as venue_name'
+        ).joins(:user, :site).find_by_me
+      else
+        redirect_to '/'
+      end
     end
 end

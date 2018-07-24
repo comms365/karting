@@ -1,3 +1,4 @@
+# model
 class Ability
   include CanCan::Ability
 
@@ -8,13 +9,12 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.user?
-      can :read, Site
       can :manage, UserSiteSession
-    elsif not user_signed_in
+      can :read, Site
+    else
       can :read, Site
       cannot :manage, User
       cannot :manage, UserSiteSession
     end
-
   end
 end

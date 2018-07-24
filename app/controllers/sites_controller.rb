@@ -1,11 +1,13 @@
+# controller
 class SitesController < ApplicationController
+  # not to confuse yourself with @SiteController.
+  # this handles the actions for Venue CRUD actions.
   load_and_authorize_resource
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
-  
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.root_url, :alert => exception.message
-  end
+  before_action :set_site, only: %i(show edit update destroy)
 
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to main_app.root_url, alert: exception.message
+  end
 
   # GET /sites
   # GET /sites.json
@@ -16,7 +18,9 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-    @leaderboard = UserSiteSession.select("user_site_sessions.*, users.name as \"user_name\"").joins(:user).where(site_id: params[:id]).find_by_all_quickest();
+    @leaderboard = UserSiteSession.select('
+      user_site_sessions.*, users.name as "user_name"
+    ').joins(:user).where(site_id: params[:id]).all_quickest
   end
 
   # GET /sites/new
@@ -25,8 +29,7 @@ class SitesController < ApplicationController
   end
 
   # GET /sites/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /sites
   # POST /sites.json
@@ -69,6 +72,7 @@ class SitesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_site
       @site = Site.find(params[:id])
@@ -76,6 +80,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:name,:location)
+      params.require(:site).permit(:name, :location)
     end
 end

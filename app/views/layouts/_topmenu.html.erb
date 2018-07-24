@@ -1,49 +1,46 @@
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Go Karting App</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href='/report'>Reports</a><li>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Venues <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <% if can? :create, 'Site' %>
-                  <li><a href="/sites/new">Add New Venue</a></li>
-                  <% end %>
-                  <li><a href="/sites/">View Venues</a></li>
-                </ul>
-              </li>
-              <% if can? :read, 'UserSiteSession' %>
-              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">My Laptimes <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <% if can? :create, 'UserSiteSession' %>
-                  <li><a href="/user_site_sessions/new">Add New Lap Time</a></li>
-                  <% end %>
-                  <li><a href="/user_site_sessions">View My Lap Times</a></li>
-                </ul>
-              </li>
-              <% end %>
-            </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Go Karting</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Go Karting">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/report">Reports</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Venues
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% if can? :create, 'Site' %>
+          <a class="dropdown-item" href="/sites/new">Add New Venue</a>
+          <% end %>
+          <a class="dropdown-item" href="/sites/">View Venues</a>
+        </div>
+      </li>
+      <% if current_user %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          My Laptimes
+        </a>
 
-            
-			<ul class="nav navbar-nav navbar-right">
-			  <% if current_user %>	
-              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-              <% else %>
-              <li><%= link_to "Sign in", new_user_session_path, :method => :get %></li>
-              <% end %>
-            </ul>
-
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
-      </nav>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+          <% if can? :create, UserSiteSession %>
+          <a class="dropdown-item" href="/user_site_sessions/new">Add New Lap Time</a>
+          <% end %>
+          <a class="dropdown-item" href="/user_site_sessions/">View Lap Times</a>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+      <% if current_user %> <%= link_to "Sign out", destroy_user_session_path, :method => :delete , :class => 'nav-link' %> <% else %>  <%= link_to "Sign in", new_user_session_path, :method => :get , :class => 'nav-link'%>  <% end %></li>
+    </ul>
+  </div>
+</nav>

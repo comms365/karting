@@ -1,4 +1,5 @@
-require 'test_helper'
+srequire 'test_helper'
+# :nodoc:
 
 class SiteTest < ActiveSupport::TestCase
   # test "the truth" do

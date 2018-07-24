@@ -1,26 +1,57 @@
-<h1>Generate Report</h1>
-<p>
-	Generate a report to make a leaderboard for a given venue, weather conditions and date range.
-</p>
+	<%= simple_form_for(UserSiteSession.new, :url=> '/generate') do |f| %>
+	<div class="card">
+  <h2 class="card-header bg-primary">Generate Report</h2>
+  <div class="card-body">
 
-<form action="/generate" method="post">
-	<div class='form-inputs'>
-		<%= simple_form_for(UserSiteSession.new) do |f| %>
-		    <%= f.input :site_id, collection: Site.all, prompt: "Select Venue", label: 'Venue <span class="required">*</span>'.html_safe %>
-		<%= f.input :weather , prompt: 'All Weather Conditions' %>
-		<% end %>
-		<label class="control-label" for='date_from'>Date From (YYYY-MM-DD) <span class='required'>*</span></label>
-		<input type='text' class='form-control' name='user_site_session[date_from]' id='date_from' />
-		<br />
-		<label class="control-label" for='date_to'>Date To (YYYY-MM-DD)</label>
-		<input type='text' class='form-control' name='user_site_session[date_to]' id='date_to' />
-		<br />
-		<div class='row form-inline'>
-			<label class='control-label' for='lap_time_from'>Include Lap Times Between Range</label><br />
-				<input type='text' class='form-control' name='user_site_session[lap_time_from]' id='lap_time_from' />
-				<input type='text' class='form-control' name='user_site_session[lap_time_to]' id='lap_time_to' />
+
+		<div class="row">
+			<div class="col-lg-4">
+			<%= f.label :site_id , label: 'Venue <span class="required">*</span>'.html_safe %>
+			</div>
+			<div class="col-lg-8">
+		    <%= f.input :site_id, collection: Site.all, prompt: "Select Venue", label: false %>
+			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+			<%= f.label :weather %>
+			</div>
+			<div class="col-lg-8">
+				<%= f.input :weather , prompt: 'All Weather Conditions' , label: false %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<label class="control-label" for='date_from'>Date From (YYYY-MM-DD) <span class='required'>*</span></label>
+			</div>
+			<div class="col-lg-8">
+				<input type='text' class='form-control' name='user_site_session[date_from]' id='date_from' />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+			<label class="control-label" for='date_to'>Date To (YYYY-MM-DD)</label>
+			</div>
+			<div class="col-lg-8">
+				<input type='text' class='form-control' name='user_site_session[date_to]' id='date_to' />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-4">
+				<label class='control-label' for='lap_time_from'>Include Lap Times Between Range</label>
+			</div>
+			<div class="col-lg-8">
+					<input type='text' class='form-control' name='user_site_session[lap_time_from]' id='lap_time_from' />
+					<input type='text' class='form-control' name='user_site_session[lap_time_to]' id='lap_time_to' />
+			</div>
+		</div>
+
 		<input type="submit" name="sub" class="btn btn-default" value="Generate" />
 
-	</div>
-</form>
+
+</div></div>
+<% end %>
