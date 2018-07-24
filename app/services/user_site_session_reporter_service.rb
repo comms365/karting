@@ -6,8 +6,7 @@ class UserSiteSessionReporterService
   end
 
   def build_query
-    @query = UserSiteSession.select('user_site_sessions.*, users.name as user_name, sites.name as venue_name')
-                            .joins(:user, :site)
+    @query = UserSiteSession.fetch_lap_times
                             .where(session_date: @params['date_from']..@params['date_to'])
                             .where(site: @params['site_id'])
                             .all_quickest
