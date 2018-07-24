@@ -11,12 +11,34 @@
     </div>
   <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :location %>
+
+<div class="card">
+  <h2 class="card-header bg-primary"><% if @site.new_record? %> New Venue <% else %> Edit Venue <% end %></h2>
+  <div class="card-body">
+
+  <div class="row">
+    <div class='col-lg-4'>
+      <%= f.label :name %>
+    </div>
+    <div class="col-lg-8">
+      <%= f.input :name , label: false %>
+    </div>
   </div>
+
+  <div class="row">
+    <div class='col-lg-4'>
+      <%= f.label :location %>
+    </div>
+    <div class="col-lg-8">
+      <%= f.input :location , label: false %>
+    </div>
+  </div>
+  
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
 <% end %>
+
+  </div>
+</div>

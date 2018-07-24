@@ -1,7 +1,9 @@
 require 'test_helper'
+# :nodoc:
 
 class SiteControllerControllerTest < ActionController::TestCase
-  # test "the truth" do
+  # test case
+  # test 'the truth' do
   #   assert true
   # end
 end

@@ -1,9 +1,9 @@
 require 'test_helper'
-
+# :nodoc:
 class SiteControllerTest < ActionController::TestCase
-  test "should get index" do
+  # test case
+  test 'should get index' do
     get :index
     assert_response :success
   end
-
 end

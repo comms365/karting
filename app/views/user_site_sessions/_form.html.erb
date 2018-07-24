@@ -2,24 +2,60 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+<div class="card">
+  <h2 class="card-header bg-primary"><% if @user_site_session.new_record? %> New Lap Time <% else %> Edit Lap Time <% end %></h2>
+  <div class="card-body">
+    <% if current_user && current_user.admin? %>
+    <div class="row">
+      <div class='col-lg-4'>
+        <%= f.label :user_id %>
+      </div>
+      <div class="col-lg-8">
+            <%= f.input :user_id, collection: User.all, prompt: "Select User", selected: @user_site_session.user_id, label: false %>
+      </div>
+    </div>
+    <% end %>
 
-  <% if current_user && current_user.admin? %>
-  <div class="form-inputs">
-    <%= f.input :user_id, collection: User.all, prompt: "Select User", selected: @user_site_session.user_id %>
-  </div>
-  <% end %>
+    <div class="row">
+      <div class='col-lg-4'>
+        <%= f.label :site_id, label: 'Venue' %>
+      </div>
+      <div class="col-lg-8">
+            <%= f.input :site_id, collection: Site.all, prompt: "Select Venue", selected: @user_site_session.site_id, label: false %>
+      </div>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :site_id, collection: Site.all, prompt: "Select Venue", label: 'Venue' %>
-  </div>
+    <div class="row">
+      <div class='col-lg-4'>
+        <%= f.label :session_date, label: 'Session Date' %>
+      </div>
+      <div class="col-lg-8">
+            <%= f.input :session_date, label: false %>
+      </div>
+    </div>
 
-  <div class="form-inputs">
-    <%= f.input :session_date %>
-    <%= f.input :weather %>
-    <%= f.input :lap_time, label: 'Your Laptime (in seconds)' %>
-  </div>
+    <div class="row">
+      <div class='col-lg-4'>
+        <%= f.label :weather %>
+      </div>
+      <div class="col-lg-8">
+            <%= f.input :weather, label: false %>
+      </div>
+    </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="row">
+      <div class='col-lg-4'>
+        <%= f.label :lap_time %>
+      </div>
+      <div class="col-lg-8">
+            <%= f.input :lap_time, label: false %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit , @user_site_session.new_record? ? 'Create Lap Time' : 'Update Lap Time' %>
+    </div>
+
   </div>
+</div>
 <% end %>
